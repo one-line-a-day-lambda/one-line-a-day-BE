@@ -21,7 +21,7 @@ router.get('/all', restricted,  (req, res) => {
 
 
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', restricted, async (req, res) => {
     
     Users.findById(req.params.id)
      .then(action => {

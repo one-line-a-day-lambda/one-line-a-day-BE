@@ -11,7 +11,6 @@ exports.up = function(knex, Promise) {
       .notNullable()
       
        //foreign key
-      //foregin key table
       tbl
       .integer('user_id')
       .unsigned()

@@ -32,20 +32,21 @@ function findById(id) {
  if (id) {
    users.where('users.id', id).first();
 
-   const promises = [users, Posts.findById(id)]; // [ projects, actions ] returning projects then actions in an array
+   const promises = [users, Posts.connect(id)]; // [ users, posts ] returning users then posts in an array
 
    return Promise.all(promises).then(function(results) { //return all data
       let [user, posts] = results; //let results == array of data
 
-     if (user) { //if project data is found
-      user.posts = posts; //set actions key in projects = to actions table
+     if (user) { //if user data is found
+      user.posts = posts; //set posts key in users = to posts table
 
-       return projectToBody(user); //pass project data to projectToBody Function to convert bool
+       return user; //pass user data to userToBody Function to convert bool
      } else {
        return null;
      }
    });
  }
+
 }
 
 async function add(user) {

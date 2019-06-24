@@ -1,7 +1,7 @@
 const express = require('express'); // importing a CommonJS module
 const helmet = require('helmet');
 const cors = require('cors')
-
+const postsRouter = require('../posts/postsRouter.js')
 const usersRouter = require('../users/usersRouter')
 const authRouter = require('../auth/authRouter')
 const server = express();
@@ -14,6 +14,7 @@ server.use(cors())
 
 server.use('/api/users', usersRouter)
 server.use('/api/auth', authRouter)
+server.use('/api/posts', postsRouter)
 
 server.get('/', (req, res) => {
   res.status(200).json({message: 'server is working'})
