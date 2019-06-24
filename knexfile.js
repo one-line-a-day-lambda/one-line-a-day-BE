@@ -5,7 +5,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: { //declaring where we want data file appear when created
-      filename: './data/users.db3'
+      filename: './data/users2.db3'
     },
     useNullAsDefault: true,
     migrations: { //declaring where we want migrations folder to appear when created

@@ -1,5 +1,5 @@
 const db = require('../data/dbConfig.js') //imports dbConfig file rather than having to import all the knex imports
-
+const Posts = require('../posts/posts-model.js') //importing Posts
 module.exports = {
     find,
     findBy,
@@ -27,8 +27,25 @@ function findBy(filter) { //returns users where the username = username
 }
 
 function findById(id) {
-    return db('users').where({id: id})
-    .first() //returns first option (only returns one option anyways) -- this pulls it out of array
+    let users = db('users');
+
+ if (id) {
+   users.where('users.id', id).first();
+
+   const promises = [users, Posts.findById(id)]; // [ projects, actions ] returning projects then actions in an array
+
+   return Promise.all(promises).then(function(results) { //return all data
+      let [user, posts] = results; //let results == array of data
+
+     if (user) { //if project data is found
+      user.posts = posts; //set actions key in projects = to actions table
+
+       return projectToBody(user); //pass project data to projectToBody Function to convert bool
+     } else {
+       return null;
+     }
+   });
+ }
 }
 
 async function add(user) {
