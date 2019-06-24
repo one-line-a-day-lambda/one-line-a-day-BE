@@ -14,8 +14,8 @@ function findUsers(department) { //returns users table and selects id, username,
     return db('users').where({department: department}).select('id', 'username', 'password')
 }
 
-function find(department) { //returns users table and selects id, username, and password columns to return
-    return db('users').where({department: department}).select('id', 'username', 'password')
+function find() { //returns users table and selects id, username, and password columns to return
+    return db('users').select('id', 'username', 'password')
 }
 
 function findAll() { //returns users table and selects id, username, and password columns to return
