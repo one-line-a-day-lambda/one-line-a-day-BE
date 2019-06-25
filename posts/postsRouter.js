@@ -34,7 +34,7 @@ router.post('/', validatePost,  (req,res) => {
     })
     .catch(err => {
      
-        res.status(502).json({message: err})
+        res.status(500).json({message: `${err} this is not working`})
         
     })
 })
