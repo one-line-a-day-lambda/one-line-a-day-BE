@@ -3,7 +3,7 @@
 const Posts = require('./posts-model.js')
 const express = require('express');
 const router = express.Router();
-const headers = require('../data/headers.js')
+
 
 router.get('/', (req, res) => {
    // res.send('hello world')
