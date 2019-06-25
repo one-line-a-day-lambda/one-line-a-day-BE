@@ -50,7 +50,7 @@ function findById(id) {
 }
 
 async function add(user) {
-    const [id] = await db('users').insert(user); //inserts user and sets it == to id
+    var [id] = await db('users').insert(user); //inserts user and sets it == to id
   
     return findById(id); //returns the user that was created 
   }
