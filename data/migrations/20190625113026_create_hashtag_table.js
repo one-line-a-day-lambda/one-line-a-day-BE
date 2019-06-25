@@ -1,19 +1,14 @@
 
 exports.up = function(knex, Promise) {
-    return knex.schema.createTable('posts', tbl => {
+    return knex.schema.createTable('hashtags', tbl => {
   
       //primary key column
       tbl.increments()
   
       //username column
       tbl
-      .string('post', 128)
+      .string('hashtag', 128)
       .notNullable()
-
-      //date
-      tbl
-      .timestamp('created_at')
-      .defaultTo(knex.fn.now())
       
        //foreign key
       tbl
@@ -29,6 +24,6 @@ exports.up = function(knex, Promise) {
   };
   
   exports.down = function(knex, Promise) {
-    return knex.schema.destroyTableIfExists('posts');
+    return knex.schema.dropTableIfExists('hashtags');
   };
   

@@ -74,21 +74,16 @@ router.put('/:id', validatePostId, async (req, res) => {
   function validatePost(req, res, next) {
     const body = Object.keys(req.body);//converts object to array to get length
     const post = req.body;
-    if (post && post.notes || post.project_id || post.description ) {
+    if (post && post.post ) {
       next();
     }
     if (body.length <= 0)  {
       res.status(400).json({message: 'missing post data'})
     }
-    if ( !post.notes ) {
+    if ( !post.post) {
       res.status(400).json({message: 'missing required notes field'})
     }
-    if ( !post.description ) {
-      res.status(400).json({message: 'missing required desription field'})
-    }
-    if ( !post.project_id ) {
-        res.status(400).json({message: 'missing required project_id field'})
-      }
+   
   };
 
   module.exports = router;
