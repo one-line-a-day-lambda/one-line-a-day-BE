@@ -3,7 +3,7 @@ const Users = require('../users/users-model.js')
 const bcrypt = require('bcryptjs'); // 
 const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets.js')
-
+const restricted = require('../auth/restricted.js')
 
 router.post('/register', (req,res) => {
     let user = req.body // user = to content user sends
@@ -20,7 +20,7 @@ router.post('/register', (req,res) => {
 })
 
 
-router.post('/login', (req, res) => {
+router.post('/login', restricted, (req, res) => {
     let {username, password} = req.body;
 
     Users.findBy({username})
@@ -28,8 +28,10 @@ router.post('/login', (req, res) => {
     .then(user => { //if user and encrypted password exists
         if (user && bcrypt.compareSync(password, user.password)) {
             const token = generateToken(user) //calls generateToken fn  and passes user as argument (username and pass)
+            req.session.user = user;
             res.status(200).json({
                 message: `Welcome ${user.username}, you have successfully logged in`,
+                id: user.id,
                 token
             })
         } else {

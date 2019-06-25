@@ -1,7 +1,8 @@
 
 exports.up = function(knex, Promise) {
+ 
     return knex.schema.createTable('posts', tbl => {
-  
+     
       //primary key column
       tbl.increments()
   
@@ -23,11 +24,12 @@ exports.up = function(knex, Promise) {
       .inTable('users')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
+      
   
     })
   
   };
-  
+
   exports.down = function(knex, Promise) {
     return knex.schema.destroyTableIfExists('posts');
   };

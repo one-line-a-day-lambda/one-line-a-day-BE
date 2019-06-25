@@ -3,7 +3,7 @@
 const Posts = require('./posts-model.js')
 const express = require('express');
 const router = express.Router();
-
+const headers = require('../data/headers.js')
 
 router.get('/', (req, res) => {
    // res.send('hello world')
@@ -27,7 +27,7 @@ router.get('/:id', validatePostId, async (req, res) => {
     })
 })
   
-router.post('/', validatePost, (req,res) => {
+router.post('/', validatePost,  (req,res) => {
     Posts.add(req.body)
     .then(newpost=> {    
         res.status(201).json({newpost})
@@ -81,7 +81,7 @@ router.put('/:id', validatePostId, async (req, res) => {
       res.status(400).json({message: 'missing post data'})
     }
     if ( !post.post) {
-      res.status(400).json({message: 'missing required notes field'})
+      res.status(400).json({message: 'missing required post field'})
     }
    
   };
