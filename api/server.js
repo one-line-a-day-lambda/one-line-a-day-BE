@@ -13,11 +13,11 @@ const sessionConfig = {
   secret: 'Leedle Lee', //encrypt and decrtypt cookie
   cookie: {
       maxAge: 1000 * 60 * 10,// max time in seconds * 60 = one minute * 10 = ten minutes
-      secure: false, /// false only during development, send cookie only over https
+      secure: true, /// false only during development, send cookie only over https
       httpOnly: true, //always true...only http can read.. not JS
   },
   resave: false, //if no changes, don't save
-  saveUnitialized: true,// GDPR laws forbid-- must check with user to run cookies, FALSE in production
+  saveUnitialized: false,// GDPR laws forbid-- must check with user to run cookies, FALSE in production
   store: new KnexSessionStore({ //must use new
       knex: require('../data/dbConfig.js'),// what file to connect to
       tablename: 'sessions', //creates a table of sessions
