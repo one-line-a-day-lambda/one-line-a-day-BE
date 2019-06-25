@@ -27,14 +27,14 @@ router.get('/:id', validatePostId, async (req, res) => {
     })
 })
   
-router.post('/', validatePost,  (req,res) => {
+router.post('/',  (req,res) => {
     Posts.add(req.body)
     .then(newpost=> {    
         res.status(201).json({newpost})
     })
     .catch(err => {
      
-        res.status(500).json({message: err})
+        res.status(502).json({message: err})
         
     })
 })
