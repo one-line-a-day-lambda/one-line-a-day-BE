@@ -50,9 +50,9 @@ function findById(id) {
 }
 
 async function add(user) {
-    var [id] = await db('users').insert(user); //inserts user and sets it == to id
+    await db('users').insert(user); //inserts user and sets it == to id
   
-    return findById(id); //returns the user that was created 
+    return findBy({username: user.username}); //returns the user that was created 
   }
 
   function remove(id) {
