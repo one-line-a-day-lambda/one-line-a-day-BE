@@ -21,7 +21,7 @@ router.get('/all', restricted,  (req, res) => {
 
 
 
-router.get('/:id', restricted, async (req, res) => {
+router.get('/:id', restricted, validateUserId, async (req, res) => {
     
     Users.findById(req.params.id)
      .then(action => {
@@ -32,7 +32,7 @@ router.get('/:id', restricted, async (req, res) => {
      })
  })
 
- router.delete('/:id', async (req, res) => {
+ router.delete('/:id', validateUserId, async (req, res) => {
     
     Users.remove(req.params.id)
      .then(action => {
@@ -42,5 +42,15 @@ router.get('/:id', restricted, async (req, res) => {
          res.status(500).json({message: err})
      })
  })
+
+ async function validateUserId( req, res, next) {
+ 
+    const id = await Users.findById(req.params.id);
+  if (id !== null) {
+    next()
+  } else {
+    res.status(400).json({message: "Invalid user id"})
+  }
+  };
 
 module.exports = router
