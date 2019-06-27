@@ -3,9 +3,9 @@
 const Posts = require('./posts-model.js')
 const express = require('express');
 const router = express.Router();
+const restricted = require('../auth/restricted.js')
 
-
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
    // res.send('hello world')
     Posts.find()
     .then(posts => {
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     })
   })
   
-router.get('/:id', validatePostId, async (req, res) => {
+router.get('/:id', restricted, validatePostId, async (req, res) => {
 
    Posts.findById(req.params.id)
     .then(post => {
@@ -27,7 +27,7 @@ router.get('/:id', validatePostId, async (req, res) => {
     })
 })
   
-router.post('/', validatePost,  (req,res) => {
+router.post('/',  validatePost,  (req,res) => {
     Posts.add(req.body)
     .then(newpost=> {    
         res.status(201).json({newpost})
@@ -39,11 +39,14 @@ router.post('/', validatePost,  (req,res) => {
     })
 })
   
-router.delete('/:id', validatePostId, async (req, res) => {
+router.delete('/:id',  validatePostId, async (req, res) => {
     Posts.remove(req.params.id)
     .then(post => {
 
-        res.status(200).json({message: 'You have deleted this post'})
+        res.status(200).json({
+          message: 'You have deleted this post',
+          post: post
+        })
     
     })
     .catch(err => {
@@ -51,7 +54,7 @@ router.delete('/:id', validatePostId, async (req, res) => {
     })
  })
   
-router.put('/:id', validatePostId, async (req, res) => { 
+router.put('/:id',  validatePostId, async (req, res) => { 
     Posts.update(req.params.id, req.body)
     .then(post => {
         res.status(200).json({post})

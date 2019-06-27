@@ -3,9 +3,9 @@ const Users = require('../users/users-model.js')
 const bcrypt = require('bcryptjs'); // 
 const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets.js')
-const restricted = require('../auth/restricted.js')
 
-router.post('/register', (req,res) => {
+
+router.post('/register', validateUser, (req,res) => {
     let user = req.body // user = to content user sends
     const hash = bcrypt.hashSync(user.password, 10) // hashes password sent 2 ^ 10th power times
     user.password = hash // password set = to this new hashed value
@@ -44,7 +44,23 @@ router.post('/login', (req, res) => {
 })
 
 
-
+function validateUser(req, res, next) {
+    const body = Object.keys(req.body);//converts object to array to get length
+    const user = req.body;
+    if (user && user.username && user.password ) {
+      next();
+    }
+    if (body.length <= 0)  {
+      res.status(422).json({message: 'missing user data'})
+    }
+    if ( !user.username) {
+      res.status(422).json({message: 'missing required username field'})
+    }
+    if ( !user.password) {
+        res.status(422).json({message: 'missing required password field'})
+      }
+   
+  };
 
 function generateToken(user) { //brings in username and password generated at login
     const payload = { //creates data object called payload -- all data is created by fn -- we can create any data we want for this token

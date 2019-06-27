@@ -23,16 +23,15 @@ function findById(id) {
    return db('posts').where({id: id})
 }
 
-function update(id, changes) {
-   return db('posts').where({id: id}).update(changes)
+async function update(id, changes) {
+   await db('posts').where({id: id}).update(changes)
+   return find()
 }
 
-function update(id, changes) {
-   return db('posts').where({id: id}).update(changes)
-}
 
-function remove(id) {
-   return db('posts').where({id: id}).del()
+async function remove(id) {
+   await db('posts').where({id: id}).del()
+   return find()
 }
 
 function add(body) {

@@ -8,7 +8,7 @@ describe('server connection', () => {
     it('should return status 200', () => {
         return supertest(server)
         .get('/')
-        .expect(200)
+        .expect(200) 
     })
 
     //testing actual content that is returned

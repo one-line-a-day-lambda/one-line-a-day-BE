@@ -56,6 +56,6 @@ async function add(user) {
   }
 
   function remove(id) {
-    return db('users').where({id: id}).del()
+     db('users').where({id: id}).del()
    
 }
