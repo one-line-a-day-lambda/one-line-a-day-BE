@@ -25,9 +25,9 @@ Backend -
 - Run npm i axios or yarn install axios
 - Connect to endpoints through Axios (see Axios docs)
 
-(Register) - POST `/api/auth/register` (will register user)
-(Login) - POST `/api/auth/login` (will return token for auth)
-(Retrieve User and their posts) - GET `/api/users/:id`
-(Delete Post) DELETE `/api/posts/:id`
-(Delete User) DELETE `/api/users/:id`
-(Edit a Post) PUT `/api/posts/:id` 
+- (Register) - POST `/api/auth/register` (will register user)
+- (Login) - POST `/api/auth/login` (will return token for auth)
+- (Retrieve User and their posts) - GET `/api/users/:id`
+- (Delete Post) DELETE `/api/posts/:id`
+- (Delete User) DELETE `/api/users/:id`
+- (Edit a Post) PUT `/api/posts/:id` 
