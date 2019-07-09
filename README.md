@@ -25,6 +25,7 @@ Backend -
 - Run npm i axios or yarn install axios
 - Connect to endpoints through Axios (see Axios docs)
 
+## Endpoints
 - (Register) - POST `/api/auth/register` (will register user)
 - (Login) - POST `/api/auth/login` (will return token for auth)
 - (Retrieve User and their posts) - GET `/api/users/:id`
